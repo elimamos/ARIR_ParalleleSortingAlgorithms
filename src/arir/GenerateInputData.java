@@ -15,8 +15,8 @@ import java.util.Random;
 public class GenerateInputData {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-        for (int i = 0; i < 14; i++) {
-            Double[] input = createInputData((int)Math.pow(2,i+5));
+        for (int i = 0; i < 15; i++) {
+            Double[] input = createInputData((int)Math.pow(2,i+10));
             new WriteToFile(i, input);
         }
     }
