@@ -7,9 +7,13 @@ package arir;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.PriorityQueue;
+import java.util.Queue;
 import java.util.Random;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -37,56 +41,74 @@ public class HyperQuickSort extends Thread {
         } else {
             stop = sd.arraySize;
         }
-        Double[] myPart = new Double[part];
+        //  Double[] myPart = new Double[part];
+        List<Double> pQueue = new ArrayList<Double>();
         int j = 0;
         for (int i = start; i < stop; i++) {
-            myPart[j] = sd.l[i];
+            pQueue.add(sd.l[i]);
             j++;
         }
-        PriorityQueue<Double[]> pQueue = new PriorityQueue<Double[]>();
-        pQueue.add(myPart);
-        int elementLenght = pQueue.element().length;
-//        for (Double d : pQueue.element()) {
-//            System.out.print(d);
-//        }
-//        System.out.println();
-        while (elementLenght != 2) {
+
+        int elementLenght = pQueue.size();
+        for (int h = 0; h < sd.arraySize / 2; h++) {
 
             int pivot = new Random().nextInt(elementLenght);
-            Double pivotValue = pQueue.element()[pivot];
+            Double pivotValue = pQueue.get(pivot);
             List<Double> smaller = new ArrayList<Double>();
             List<Double> larger = new ArrayList<Double>();
 
             for (int l = 0; l < elementLenght; l++) {
-                if (pivot > sd.l[l]) {
-                    larger.add(myPart[l]);
-                } else {
-                    smaller.add(myPart[l]);
+
+                if (pivotValue >= pQueue.get(l)) {
+                    smaller.add(pQueue.get(l));
+
+                } else if (pivotValue < pQueue.get(l)) {
+                    larger.add(pQueue.get(l));
                 }
             }
-            pQueue.remove();
-            if (larger.size() != 0) {
-                Double[] tempList = new Double[larger.size()];
-                larger.toArray(tempList);
-                pQueue.add(tempList);
-            }
-            if (smaller.size() != 0) {
-                Double[] tempSmalList = new Double[smaller.size()];
-                larger.toArray(tempSmalList);
-                pQueue.add(tempSmalList);
-            }
-            elementLenght = pQueue.element().length;
-            //   sd.sorted[position] = me;
 
+       sd.stopped.add(myID);
+            synchronized (sd.sorted) {
+                if(sd.stopped.size() != sd.threadCount ){
+                    try {
+                        System.out.println("LOCKED: "+myID+ " out of " + sd.threadCount+" stopped "+sd.stopped );
+                        sd.sorted.wait();
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(HyperQuickSort.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                 sd.sorted.notifyAll();
+                 sd.stopped.clear();
+            }
+           for(int g=0; g<smaller.size();g++){
+               int newStart= start-smaller.size();
+               if(newStart<0){
+                   newStart=0;
+               }
+                sd.l[newStart+g]= smaller.get(g);
+           } 
+              for(int g=0; g<larger.size();g++){
+               int newStart= stop-larger.size();
+               if(newStart<0){
+                   newStart=0;
+               }
+                sd.l[newStart+g]= larger.get(g);
+           }
+//        Iterator it = pQueue.iterator();
+//        //  Double[] currentMin = pQueue.element();
+//        while (it.hasNext()) {
+////            if (currentMin[0] > ((Double[]) it.next())[0]) {
+////
+////            }
+//
+//            for (Double d : (Double[]) it.next()) {
+//                //   sd.sorted[]
+//                //System.out.print(d);
+//            }
+//            System.out.println();
+//        }
+//    }
         }
-        Iterator it = pQueue.iterator();
-        while(it.hasNext()){
-        for (Double d : (Double[])it.next()) {
-            System.out.print(d);
-        }
-        System.out.println();
-        }
+        
     }
-
 }
-

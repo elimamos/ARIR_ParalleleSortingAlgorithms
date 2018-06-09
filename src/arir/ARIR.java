@@ -4,16 +4,21 @@
  * and open the template in the editor.
  */
 
+import arir.BubbleSortSerial;
 import arir.EnumSortTest;
 import arir.EnumerationSort;
 import arir.HyperQuickSort;
 import arir.SortData;
+import arir.WriteToFile;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  *
@@ -21,32 +26,82 @@ import java.util.List;
  */
 public class ARIR {
 
+    public static class Result {
+
+        public int num;
+        public long time;
+
+        public Result(int num, long time) {
+            this.num = num;
+            this.time = time;
+        }
+        
+        
+    }
+
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
-         int threadCount = 4;
-        Double[] l = readArrayFromFile();
-        EnumSortTest t = new EnumSortTest(l, threadCount);
-        Double[] result;
-        long startTime = System.currentTimeMillis();
-        result = t.test();
-        long endTime = System.currentTimeMillis();
 
-        long totalTime = endTime - startTime;
-        System.out.println(totalTime+"ms");
-         startTime = System.currentTimeMillis();
-        result = t.testHyper();
-         endTime = System.currentTimeMillis();
-
-         totalTime = endTime - startTime;
-        System.out.println(totalTime+"ms");
+        String resultFileName = "RESULT_enum4Threads.txt";
+        int testCaseCount = 10;
+        ArrayList<Result> results = new ArrayList<>();
+        int testRepetition =1000;
         
+        
+        int threadCount = 4;
+
+        for (int i = 0; i < testCaseCount; i++) {
+            
+            String fileName= String.valueOf(i)+".txt";
+            Double[] l = readArrayFromFile(fileName);
+            BubbleSortSerial bo = new BubbleSortSerial();
+            bo.BubbleSortSerial(l);
+            
+            long avg = 0;
+            for(int j =0;j<testRepetition;j++){
+                
+            EnumSortTest t = new EnumSortTest(l, threadCount);
+            Double[] result;
+            long startTime = System.currentTimeMillis();
+            result = t.test();
+            long endTime = System.currentTimeMillis();
+            //bo.printArray(result);
+
+            long totalTime = endTime - startTime;
+            avg+=totalTime;
+            }
+            avg=avg/testRepetition;
+            System.out.println(avg + "ms");
+            results.add(new Result(i, avg));
+        }
+        saveResultToFile(results, resultFileName);
 
     }
 
-    static Double[] readArrayFromFile() throws FileNotFoundException {
-        FileReader fileReader = new FileReader("array.txt");
+    static void saveResultToFile(ArrayList<Result> r,String fileName){
+           try{
+    // Create file 
+    FileWriter fstream = new FileWriter(fileName);
+        BufferedWriter out = new BufferedWriter(fstream);
+        for(int i =0; i <r.size();i++){
+         out.write(r.get(i).num+ ",");   
+        }
+        out.write("\n");
+        for(int i =0; i <r.size();i++){
+         out.write(r.get(i).time+ ",");   
+        }
+    
+    //Close the output stream
+    out.close();
+    }catch (Exception e){//Catch exception if any
+      System.err.println("Error: " + e.getMessage());
+    }
+    }
+    
+    static Double[] readArrayFromFile(String fileName) throws FileNotFoundException {
+        FileReader fileReader = new FileReader(fileName);
         List<Double> lines = new ArrayList<>();
         try {
             BufferedReader bufferedReader = new BufferedReader(fileReader);

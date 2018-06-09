@@ -34,7 +34,7 @@ public class EnumerationSort extends SortType {
         if (myID != sd.threadCount - 1) {
             stop = start + part;
         } else {
-            stop = sd.arraySize - 1;
+            stop = sd.arraySize ;
         }
 
         for (int i = start; i < stop; i++) {

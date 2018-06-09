@@ -5,6 +5,7 @@
  */
 package arir;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -16,6 +17,7 @@ public class SortData {
     Double[] l;
     int arraySize;
     int threadCount;
+    List<Integer> stopped;
    public Double[] sorted;
 
     public SortData(Double[] l, int threadCount) {
@@ -23,6 +25,7 @@ public class SortData {
         arraySize = l.length;
         this.threadCount = threadCount;
         sorted = new Double[arraySize];
+        stopped = new ArrayList<>();
     }
 
 }
