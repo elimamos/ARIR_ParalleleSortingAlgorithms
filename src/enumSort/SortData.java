@@ -14,11 +14,11 @@ import java.util.List;
  */
 public class SortData {
 
-    Double[] l;
-    int arraySize;
-    int threadCount;
-    List<Integer> stopped;
-   public Double[] sorted;
+    public Double[] l;
+    public int arraySize;
+    public int threadCount;
+    public List<Integer> stopped;
+    public Double[] sorted;
 
     public SortData(Double[] l, int threadCount) {
         this.l = l;

@@ -12,12 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Bodzio/Documents/Pani%20z%20kolejki%20do%20dziekanatu/Airir/src/arir/ARIR.java</file>
-            <file>file:/C:/Users/Bodzio/Documents/Pani%20z%20kolejki%20do%20dziekanatu/Airir/src/arir/GenerateInputData.java</file>
-            <file>file:/C:/Users/Bodzio/Documents/Pani%20z%20kolejki%20do%20dziekanatu/Airir/src/quickSort/QuickSort.java</file>
-            <file>file:/C:/Users/Bodzio/Documents/Pani%20z%20kolejki%20do%20dziekanatu/Airir/src/quickSortMaxThread/SortThreadMax.java</file>
-            <file>file:/C:/Users/Bodzio/Documents/Pani%20z%20kolejki%20do%20dziekanatu/Airir/src/quickSortMaxThread/QuickSortMaxThread.java</file>
-            <file>file:/C:/Users/Bodzio/Documents/Pani%20z%20kolejki%20do%20dziekanatu/Airir/src/quickSort/SortThread.java</file>
+            <file>file:/C:/Users/Elisa/Documents/NetBeansProjects/ARIR/src/mergeSort/MergeSort.java</file>
+            <file>file:/C:/Users/Elisa/Documents/NetBeansProjects/ARIR/src/oddEvenTranspositionSort/OddEvenTranspositionSort.java</file>
+            <file>file:/C:/Users/Elisa/Documents/NetBeansProjects/ARIR/src/oddEvenTranspositionSort/OddEvenTranspositionSortTest.java</file>
+            <file>file:/C:/Users/Elisa/Documents/NetBeansProjects/ARIR/src/arir/WriteToFile.java</file>
+            <file>file:/C:/Users/Elisa/Documents/NetBeansProjects/ARIR/src/arir/ARIR.java</file>
         </group>
     </open-files>
 </project-private>

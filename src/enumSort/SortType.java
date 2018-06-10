@@ -10,14 +10,15 @@ package enumSort;
  * @author Elisa
  */
 public class SortType extends Thread {
-     SortData sd;
-    int myID;
+
+    public SortData sd;
+    public int myID;
 
     public SortType(SortData sd, int myID) {
         this.sd = sd;
         this.myID = myID;
-       //  new Thread(this, "sorter").start();
+        //  new Thread(this, "sorter").start();
 
     }
-    
+
 }

@@ -7,6 +7,7 @@ package arir;
  */
 import bubleSort.BubbleSortSerial;
 import enumSort.EnumSortTest;
+import enumSort.SortData;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -15,11 +16,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.*;
 import java.util.List;
+import java.util.stream.DoubleStream;
+import mergeSort.MergeSort;
+import oddEvenTranspositionSort.OddEvenTranspositionSort;
+import oddEvenTranspositionSort.OddEvenTranspositionSortTest;
 import quickSort.QuickSort;
 import quickSortMaxThread.QuickSortMaxThread;
 import quickSortMaxThread.SortThreadMax;
-
 
 /**
  *
@@ -44,48 +49,82 @@ public class ARIR {
      */
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
-        String resultFileName = "QuickSort_1_"+System.currentTimeMillis()+".csv";
+        String resultFileName = "QuickSort_1_" + System.currentTimeMillis() + ".csv";
         int testCaseCount = 10;
         ArrayList<Result> results = new ArrayList<>();
         int testRepetition = 500;
-
-        
 
         for (int i = 0; i < testCaseCount; i++) {
 
             String fileName = String.valueOf(i) + ".txt";
             Double[] l = readArrayFromFile(fileName);
-/*
+            /*
             SortThreadMax s = new SortThreadMax(null, null, i, i);
             ArrayList<Double> list= new ArrayList<>(Arrays.asList(l));
             s.sort(list, 0, list.size()-1);
             System.out.println(list);
-  */          
+             */
 
-            
             long avg = 0;
             for (int j = 0; j < testRepetition; j++) {
 
-                //EnumSortTest t = new EnumSortTest(l, 4);
+              //  EnumSortTest t = new EnumSortTest(l, 4);
                 //QuickSort t = new QuickSort(l);
-                //BubbleSortSerial t = new BubbleSortSerial(l);
-                QuickSortMaxThread t = new QuickSortMaxThread(l, 1);
-                
+                BubbleSortSerial bu = new BubbleSortSerial(l);
+                // QuickSortMaxThread t = new QuickSortMaxThread(l, 1);
+                //  MergeSort t = new MergeSort(l);
+              
+                OddEvenTranspositionSortTest t = new OddEvenTranspositionSortTest(l, 1);
                 Double[] result;
                 long startTime = System.currentTimeMillis();
                 result = t.test();
                 long endTime = System.currentTimeMillis();
-                //bo.printArray(result);
+                if (j == 0) {
+                    Double[] bubbleResult = bu.test();
+                    Double bubSum = 0.0;
+                    for (Double d : bubbleResult) {
+                        bubSum += d;
+                    }
+                    Double testSum = 0.0;
+                    for (Double d : result) {
+                        testSum += d;
+                    }
+                    int controlSum=0;
+                    for(int g =0 ; g<result.length;g++){
+                        if(result[g].equals(bubbleResult[g])){
+                        
+                            controlSum++;
+                       }
+                    }
+                    
+                    
+                    if (bubSum.equals(bubSum)&controlSum==result.length) {
+                        System.out.println("Results are correct!");
+                    } else {
+                        System.out.println("Results are WRONG!");
 
-                long totalTime = endTime - startTime;
-                avg += totalTime;
-            }
-            avg = avg / testRepetition;
-            System.out.println(avg + "ms");
-            results.add(new Result(l.length, avg));
+                    }
+                }
+            
+//printArray(result);
+            long totalTime = endTime - startTime;
+            avg += totalTime;
         }
-        saveResultToFile(results, resultFileName);
+        avg = avg / testRepetition;
+        System.out.println(avg + "ms");
+        results.add(new Result(l.length, avg));
+    }
 
+    saveResultToFile(results, resultFileName);
+
+}
+
+public static void printArray(Double arr[]) {
+        int n = arr.length;
+        for (int i = 0; i < n / 5; ++i) {
+            System.out.print(arr[i] + " ");
+        }
+        System.out.println();
     }
 
     static void saveResultToFile(ArrayList<Result> r, String fileName) {
@@ -93,7 +132,7 @@ public class ARIR {
             // Create file 
             FileWriter fstream = new FileWriter(fileName);
             BufferedWriter out = new BufferedWriter(fstream);
-            
+
             out.write(String.valueOf(r.get(0).num));
             for (int i = 1; i < r.size(); i++) {
                 out.write("," + r.get(i).num);
