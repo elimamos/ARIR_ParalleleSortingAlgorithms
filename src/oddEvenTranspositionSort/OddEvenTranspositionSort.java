@@ -38,17 +38,10 @@ public class OddEvenTranspositionSort extends SortType {
             stop = sd.arraySize - 2;
         }
 
-        if (start % 2 == 0) {
-            oddStart = start;
-            evenStart = start + 1;
-        } else {
-            oddStart = start + 1;
-            evenStart = start;
-        }
-
         while (!sorted) {
             sorted = true;
-            for (int i = oddStart; i <= stop; i = i + 2) {
+
+            for (int i = 1; i <= stop; i = i + 2) {
                 if (sd.l[i] > sd.l[i + 1]) {
                     tmp = sd.l[i];
                     sd.l[i] = sd.l[i + 1];
@@ -59,7 +52,7 @@ public class OddEvenTranspositionSort extends SortType {
                 }
             }
 
-            for (int i = evenStart; i <= stop; i = i + 2) {
+            for (int i = 0; i <= stop; i = i + 2) {
                 if (sd.l[i] > sd.l[i + 1]) {
                     tmp = sd.l[i];
                     sd.l[i] = sd.l[i + 1];
@@ -70,12 +63,9 @@ public class OddEvenTranspositionSort extends SortType {
                 }
             }
         }
+
 //        for (Double a : sd.l) {
 //            System.out.println(a + "\n");
-//        }
-//        for (Double a : sd.sorted) {
-//            System.out.println(a + "\n");
-//        }
+        }
     }
 
-}

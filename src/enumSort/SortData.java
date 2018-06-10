@@ -19,6 +19,7 @@ public class SortData {
     public int threadCount;
     public List<Integer> stopped;
     public Double[] sorted;
+    public Double pivotValue;
 
     public SortData(Double[] l, int threadCount) {
         this.l = l;
@@ -26,6 +27,7 @@ public class SortData {
         this.threadCount = threadCount;
         sorted = new Double[arraySize];
         stopped = new ArrayList<>();
+        pivotValue=-1.0;
     }
 
 }

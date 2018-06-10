@@ -12,7 +12,7 @@ import quickSort.SortThread;
 
 /**
  *
- * @author Bodzio
+ * @author Zuzia
  */
 public class QuickSortMaxThread extends GenericSort {
 

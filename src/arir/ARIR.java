@@ -49,7 +49,7 @@ public class ARIR {
      */
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
 
-        String resultFileName = "QuickSort_1_" + System.currentTimeMillis() + ".csv";
+        String resultFileName = "OddEvenTranspositionSortTest" + System.currentTimeMillis() + ".csv";
         int testCaseCount = 10;
         ArrayList<Result> results = new ArrayList<>();
         int testRepetition = 500;
@@ -64,23 +64,23 @@ public class ARIR {
             s.sort(list, 0, list.size()-1);
             System.out.println(list);
              */
-
+            BubbleSortSerial bu = new BubbleSortSerial(l);
+            Double[] bubbleResult = bu.test();
             long avg = 0;
             for (int j = 0; j < testRepetition; j++) {
 
-              //  EnumSortTest t = new EnumSortTest(l, 4);
+               // EnumSortTest t = new EnumSortTest(l, 64);
                 //QuickSort t = new QuickSort(l);
-                BubbleSortSerial bu = new BubbleSortSerial(l);
-                // QuickSortMaxThread t = new QuickSortMaxThread(l, 1);
-                //  MergeSort t = new MergeSort(l);
-              
-                OddEvenTranspositionSortTest t = new OddEvenTranspositionSortTest(l, 1);
+
+              //  QuickSortMaxThread t = new QuickSortMaxThread(l, 32);
+                 // MergeSort t = new MergeSort(l);
+                  OddEvenTranspositionSortTest t = new OddEvenTranspositionSortTest(l, 1);
                 Double[] result;
                 long startTime = System.currentTimeMillis();
                 result = t.test();
                 long endTime = System.currentTimeMillis();
                 if (j == 0) {
-                    Double[] bubbleResult = bu.test();
+
                     Double bubSum = 0.0;
                     for (Double d : bubbleResult) {
                         bubSum += d;
@@ -89,37 +89,36 @@ public class ARIR {
                     for (Double d : result) {
                         testSum += d;
                     }
-                    int controlSum=0;
-                    for(int g =0 ; g<result.length;g++){
-                        if(result[g].equals(bubbleResult[g])){
-                        
+                    int controlSum = 0;
+                    for (int g = 0; g < result.length; g++) {
+                        if (result[g].equals(bubbleResult[g])) {
+
                             controlSum++;
-                       }
+                        }
                     }
-                    
-                    
-                    if (bubSum.equals(bubSum)&controlSum==result.length) {
+
+                    if (bubSum.equals(bubSum) & controlSum == result.length) {
                         System.out.println("Results are correct!");
                     } else {
                         System.out.println("Results are WRONG!");
 
                     }
                 }
-            
+
 //printArray(result);
-            long totalTime = endTime - startTime;
-            avg += totalTime;
+                long totalTime = endTime - startTime;
+                avg += totalTime;
+            }
+            avg = avg / testRepetition;
+            System.out.println(avg + "ms");
+            results.add(new Result(l.length, avg));
         }
-        avg = avg / testRepetition;
-        System.out.println(avg + "ms");
-        results.add(new Result(l.length, avg));
+
+        saveResultToFile(results, resultFileName);
+
     }
 
-    saveResultToFile(results, resultFileName);
-
-}
-
-public static void printArray(Double arr[]) {
+    public static void printArray(Double arr[]) {
         int n = arr.length;
         for (int i = 0; i < n / 5; ++i) {
             System.out.print(arr[i] + " ");

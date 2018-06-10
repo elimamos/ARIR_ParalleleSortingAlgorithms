@@ -5,7 +5,6 @@
  */
 package oddEvenTranspositionSort;
 
-import enumSort.HyperQuickSort;
 import enumSort.SortData;
 
 /**
@@ -31,9 +30,9 @@ public class OddEvenTranspositionSortTest {
         for (int h = 0; h < sd.threadCount; h++) {
             esArray[h].start();
         }
-        for (int h = 0; h < sd.threadCount; h++) {
-            esArray[h].join();
-        }
+//        for (int h = 0; h < sd.threadCount; h++) {
+//            esArray[h].join();
+//        }
 
         return sd.sorted;
     }

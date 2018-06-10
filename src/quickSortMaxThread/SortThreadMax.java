@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  *
- * @author Bodzio
+ * @author Zuzia
  */
 public class SortThreadMax extends Thread {
 
