@@ -11,6 +11,7 @@ import java.util.Random;
 /**
  *
  * @author Zuzia
+ * Quick Sort that is limited to a give level
  */
 public class SortThreadMax extends Thread {
 

@@ -5,9 +5,7 @@ package arir;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-import bubleSort.BubbleSortSerial;
 import enumSort.EnumSortTest;
-import enumSort.SortData;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -15,16 +13,7 @@ import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.stream.*;
 import java.util.List;
-import java.util.stream.DoubleStream;
-import mergeSort.MergeSort;
-import oddEvenTranspositionSort.OddEvenTranspositionSort;
-import oddEvenTranspositionSort.OddEvenTranspositionSortTest;
-import quickSort.QuickSort;
-import quickSortMaxThread.QuickSortMaxThread;
-import quickSortMaxThread.SortThreadMax;
 
 /**
  *
@@ -59,53 +48,66 @@ public class ARIR {
             String fileName = String.valueOf(i) + ".txt";
             Double[] l = readArrayFromFile(fileName);
             /*
-            SortThreadMax s = new SortThreadMax(null, null, i, i);
-            ArrayList<Double> list= new ArrayList<>(Arrays.asList(l));
-            s.sort(list, 0, list.size()-1);
-            System.out.println(list);
+                  Bubble sort for refference   
              */
-            BubbleSortSerial bu = new BubbleSortSerial(l);
-            Double[] bubbleResult = bu.test();
+
+//            Double[] bubbleResult= l;
+//            BubbleSortSerial bu = new BubbleSortSerial(bubbleResult);
+//            bubbleResult = bu.test();
+//        
             long avg = 0;
             for (int j = 0; j < testRepetition; j++) {
+                Double[] testArray = new Double[l.length];
+                int s = 0;
+                for (Double d : l) {
+                    testArray[s] = d;
+                    s++;
 
-               // EnumSortTest t = new EnumSortTest(l, 64);
+                }
+                /*
+                    All the possible sorting algorithms 
+                 */
+                EnumSortTest t = new EnumSortTest(l, 64);
                 //QuickSort t = new QuickSort(l);
-
-              //  QuickSortMaxThread t = new QuickSortMaxThread(l, 32);
-                 // MergeSort t = new MergeSort(l);
-                  OddEvenTranspositionSortTest t = new OddEvenTranspositionSortTest(l, 1);
+                //  BubbleSortSerial t = new BubbleSortSerial(testArray);
+                //  QuickSortMaxThread t = new QuickSortMaxThread(l, 32);
+                // MergeSort t = new MergeSort(l);
+                //  OddEvenTranspositionSortTest t = new OddEvenTranspositionSortTest(testArray, 1);
+//              
                 Double[] result;
                 long startTime = System.currentTimeMillis();
+                //quicksort(testArray, 0, testArray.length-1);
                 result = t.test();
                 long endTime = System.currentTimeMillis();
-                if (j == 0) {
 
-                    Double bubSum = 0.0;
-                    for (Double d : bubbleResult) {
-                        bubSum += d;
-                    }
-                    Double testSum = 0.0;
-                    for (Double d : result) {
-                        testSum += d;
-                    }
-                    int controlSum = 0;
-                    for (int g = 0; g < result.length; g++) {
-                        if (result[g].equals(bubbleResult[g])) {
-
-                            controlSum++;
-                        }
-                    }
-
-                    if (bubSum.equals(bubSum) & controlSum == result.length) {
-                        System.out.println("Results are correct!");
-                    } else {
-                        System.out.println("Results are WRONG!");
-
-                    }
-                }
-
-//printArray(result);
+                /*
+                        Check if created data is correct
+                 */
+//                if (j == 0) {
+//
+//                    Double bubSum = 0.0;
+//                    for (Double d : bubbleResult) {
+//                        bubSum += d;
+//                    }
+//                    Double testSum = 0.0;
+//                    for (Double d : result) {
+//                        testSum += d;
+//                    }
+//                    int controlSum = 0;
+//                    for (int g = 0; g < result.length; g++) {
+//                        if (result[g].equals(bubbleResult[g])) {
+//
+//                            controlSum++;
+//                        }
+//                    }
+//
+//                    if (bubSum.equals(bubSum) & controlSum == result.length) {
+//                        System.out.println("Results are correct!");
+//                    } else {
+//                        System.out.println("Results are WRONG!");
+//
+//                    }
+//                }
                 long totalTime = endTime - startTime;
                 avg += totalTime;
             }
@@ -118,6 +120,39 @@ public class ARIR {
 
     }
 
+    /*
+                    Serial Quick Sort for reference
+     */
+    private static void quicksort(Double tablica[], int x, int y) {
+        int i, j;
+        Double v, temp;
+
+        i = x;
+        j = y;
+        v = tablica[(x + y) / 2];
+        do {
+            while (tablica[i] < v) {
+                i++;
+            }
+            while (v < tablica[j]) {
+                j--;
+            }
+            if (i <= j) {
+                temp = tablica[i];
+                tablica[i] = tablica[j];
+                tablica[j] = temp;
+                i++;
+                j--;
+            }
+        } while (i <= j);
+        if (x < j) {
+            quicksort(tablica, x, j);
+        }
+        if (i < y) {
+            quicksort(tablica, i, y);
+        }
+    }
+
     public static void printArray(Double arr[]) {
         int n = arr.length;
         for (int i = 0; i < n / 5; ++i) {
@@ -126,6 +161,9 @@ public class ARIR {
         System.out.println();
     }
 
+    /*
+                 Saving the results to a CSV file    
+     */
     static void saveResultToFile(ArrayList<Result> r, String fileName) {
         try {
             // Create file 
@@ -149,6 +187,9 @@ public class ARIR {
         }
     }
 
+    /*
+                Reading input data from files generated by the GenerateInputData class 
+     */
     static Double[] readArrayFromFile(String fileName) throws FileNotFoundException {
         FileReader fileReader = new FileReader(fileName);
         List<Double> lines = new ArrayList<>();
@@ -165,7 +206,6 @@ public class ARIR {
             System.out.println("Unable to read !");
         }
         Double[] array = lines.toArray(new Double[lines.size()]);
-        // return lines.toArray(new String[lines.size()]);
         return array;
     }
 }

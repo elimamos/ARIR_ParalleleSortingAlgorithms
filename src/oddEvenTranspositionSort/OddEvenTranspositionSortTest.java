@@ -20,7 +20,7 @@ public class OddEvenTranspositionSortTest {
         this.threadCount = threadCount;
 
     }
-   public Double[] test( ) throws InterruptedException {
+   public Double[] test() throws InterruptedException {
        
          SortData sd = new SortData(data, threadCount);
         Thread[] esArray = new Thread[sd.threadCount];
@@ -30,9 +30,9 @@ public class OddEvenTranspositionSortTest {
         for (int h = 0; h < sd.threadCount; h++) {
             esArray[h].start();
         }
-//        for (int h = 0; h < sd.threadCount; h++) {
-//            esArray[h].join();
-//        }
+        for (int h = 0; h < sd.threadCount; h++) {
+            esArray[h].join();
+        }
 
         return sd.sorted;
     }

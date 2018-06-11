@@ -11,19 +11,11 @@ package enumSort;
  */
 public class EnumerationSort extends SortType {
 
-//    SortData sd;
-//    int myID;
+
 
     public EnumerationSort(SortData sd, int myID) {
         super(sd, myID);
     }
-
-//    public EnumerationSort(SortData sd, int myID) {
-//        this.sd = sd;
-//        this.myID = myID;
-//       //  new Thread(this, "sorter").start();
-//
-//    }
 
     @Override
     public void run() {

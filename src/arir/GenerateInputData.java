@@ -12,21 +12,21 @@ import java.util.Random;
  *
  * @author Elisa
  */
+/*
+        Class for generating input data 
+ */
 public class GenerateInputData {
 
     public static void main(String[] args) throws FileNotFoundException, InterruptedException {
         for (int i = 0; i < 15; i++) {
-            Double[] input = createInputData((int)Math.pow(2,i+10));
+            Double[] input = createInputData((int) Math.pow(2, i + 10));
             new WriteToFile(i, input);
         }
     }
-//       
-//        for(Double d : input){
-//            System.out.println(d);
-//        }
-//       
-//   }   
 
+    /*
+        Generate random double values
+     */
     static Double[] createInputData(int inputSize) {
         Double[] inputData = new Double[inputSize];
         for (int i = 0; i < inputSize; i++) {

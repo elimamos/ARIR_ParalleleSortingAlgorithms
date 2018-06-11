@@ -7,7 +7,7 @@ package bubleSort;
 
 /**
  *
- * @author Elisa
+ * Taken from : https://www.geeksforgeeks.org/bubble-sort/
  */
 public class BubbleSortSerial {
     private Double arr[];

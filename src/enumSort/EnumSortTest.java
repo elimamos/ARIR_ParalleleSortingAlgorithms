@@ -21,7 +21,6 @@ public  class EnumSortTest {
     }
   
     public Double[] test( ) throws InterruptedException {
-        // System.out.println(l);
         SortData sd = new SortData(data, threadCount);
         Thread[] esArray = new Thread[threadCount];
         for (int h = 0; h < threadCount; h++) {
@@ -40,7 +39,6 @@ public  class EnumSortTest {
             } else {
                 sd.sorted[j] = previousNotNull;
             }
-            // System.out.println(sd.sorted[j]);
         }
 
         return sd.sorted;

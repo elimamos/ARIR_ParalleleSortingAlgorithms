@@ -7,15 +7,18 @@ package arir;
 
 /**
  *
- * @author Bodzio
+ * @author Elisa
+ */
+/*
+               Parent class to create clear structure of a class     
  */
 public abstract class GenericSort {
-    
-     protected Double[] data;
-     
-     public GenericSort(Double[] data){
-         this.data=data;
-     }
-    
-     public abstract Double[] test()  throws InterruptedException; 
+
+    protected Double[] data;
+
+    public GenericSort(Double[] data) {
+        this.data = data;
+    }
+
+    public abstract Double[] test() throws InterruptedException;
 }

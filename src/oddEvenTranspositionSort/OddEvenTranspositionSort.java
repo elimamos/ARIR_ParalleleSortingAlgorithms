@@ -5,6 +5,7 @@
  */
 package oddEvenTranspositionSort;
 
+import bubleSort.BubbleSortSerial;
 import enumSort.EnumerationSort;
 import enumSort.SortData;
 import enumSort.SortType;
@@ -64,8 +65,5 @@ public class OddEvenTranspositionSort extends SortType {
             }
         }
 
-//        for (Double a : sd.l) {
-//            System.out.println(a + "\n");
-        }
     }
-
+}

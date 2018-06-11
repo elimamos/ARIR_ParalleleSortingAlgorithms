@@ -14,22 +14,23 @@ import java.io.FileWriter;
  */
 public class WriteToFile {
 
+    /*
+    Write input data to txt file 
+     */
+    public WriteToFile(int testNum, Double args[]) {
+        try {
+            // Create file 
+            FileWriter fstream = new FileWriter(testNum + ".txt");
+            BufferedWriter out = new BufferedWriter(fstream);
+            for (int i = 0; i < args.length; i++) {
+                out.write(args[i] + "\n");
+            }
 
-   public WriteToFile(int testNum, Double args[])
-  {
-      try{
-    // Create file 
-    FileWriter fstream = new FileWriter(testNum + ".txt");
-        BufferedWriter out = new BufferedWriter(fstream);
-        for(int i =0; i <args.length;i++){
-         out.write(args[i]+"\n");   
+            //Close the output stream
+            out.close();
+        } catch (Exception e) {//Catch exception if any
+            System.err.println("Error: " + e.getMessage());
         }
-    
-    //Close the output stream
-    out.close();
-    }catch (Exception e){//Catch exception if any
-      System.err.println("Error: " + e.getMessage());
     }
-  }
 
 }

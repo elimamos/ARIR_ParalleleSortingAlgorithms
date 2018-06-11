@@ -17,17 +17,13 @@ public class SortData {
     public Double[] l;
     public int arraySize;
     public int threadCount;
-    public List<Integer> stopped;
     public Double[] sorted;
-    public Double pivotValue;
 
     public SortData(Double[] l, int threadCount) {
         this.l = l;
         arraySize = l.length;
         this.threadCount = threadCount;
         sorted = new Double[arraySize];
-        stopped = new ArrayList<>();
-        pivotValue=-1.0;
     }
 
 }

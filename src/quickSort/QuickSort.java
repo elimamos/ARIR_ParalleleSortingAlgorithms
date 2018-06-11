@@ -26,7 +26,6 @@ public class QuickSort extends GenericSort{
         sorted.toArray(returnArray);
         return returnArray;
 
-//System.out.println(sorted);
     }
 
 }

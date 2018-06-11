@@ -2,7 +2,9 @@ package quickSort;
 
 import java.util.ArrayList;
 import java.util.Random;
-
+/*
+    Automatic generated threads quicksort
+*/
 public class SortThread extends Thread {
 
 	private final ArrayList<Double> data;

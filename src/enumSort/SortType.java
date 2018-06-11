@@ -17,7 +17,6 @@ public class SortType extends Thread {
     public SortType(SortData sd, int myID) {
         this.sd = sd;
         this.myID = myID;
-        //  new Thread(this, "sorter").start();
 
     }
 
