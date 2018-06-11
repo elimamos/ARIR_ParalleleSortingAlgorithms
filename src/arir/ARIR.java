@@ -5,6 +5,7 @@ package arir;
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
+import bubleSort.BubbleSortSerial;
 import enumSort.EnumSortTest;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -14,6 +15,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import mergeSort.MergeSort;
 
 /**
  *
@@ -51,9 +53,9 @@ public class ARIR {
                   Bubble sort for refference   
              */
 
-//            Double[] bubbleResult= l;
-//            BubbleSortSerial bu = new BubbleSortSerial(bubbleResult);
-//            bubbleResult = bu.test();
+            Double[] bubbleResult= l;
+            BubbleSortSerial bu = new BubbleSortSerial(bubbleResult);
+            bubbleResult = bu.test();
 //        
             long avg = 0;
             for (int j = 0; j < testRepetition; j++) {
@@ -67,11 +69,11 @@ public class ARIR {
                 /*
                     All the possible sorting algorithms 
                  */
-                EnumSortTest t = new EnumSortTest(l, 64);
+               // EnumSortTest t = new EnumSortTest(l, 64);
                 //QuickSort t = new QuickSort(l);
                 //  BubbleSortSerial t = new BubbleSortSerial(testArray);
                 //  QuickSortMaxThread t = new QuickSortMaxThread(l, 32);
-                // MergeSort t = new MergeSort(l);
+                 MergeSort t = new MergeSort(l);
                 //  OddEvenTranspositionSortTest t = new OddEvenTranspositionSortTest(testArray, 1);
 //              
                 Double[] result;
@@ -83,31 +85,31 @@ public class ARIR {
                 /*
                         Check if created data is correct
                  */
-//                if (j == 0) {
-//
-//                    Double bubSum = 0.0;
-//                    for (Double d : bubbleResult) {
-//                        bubSum += d;
-//                    }
-//                    Double testSum = 0.0;
-//                    for (Double d : result) {
-//                        testSum += d;
-//                    }
-//                    int controlSum = 0;
-//                    for (int g = 0; g < result.length; g++) {
-//                        if (result[g].equals(bubbleResult[g])) {
-//
-//                            controlSum++;
-//                        }
-//                    }
-//
-//                    if (bubSum.equals(bubSum) & controlSum == result.length) {
-//                        System.out.println("Results are correct!");
-//                    } else {
-//                        System.out.println("Results are WRONG!");
-//
-//                    }
-//                }
+                if (j == 0) {
+
+                    Double bubSum = 0.0;
+                    for (Double d : bubbleResult) {
+                        bubSum += d;
+                    }
+                    Double testSum = 0.0;
+                    for (Double d : result) {
+                        testSum += d;
+                    }
+                    int controlSum = 0;
+                    for (int g = 0; g < result.length; g++) {
+                        if (result[g].equals(bubbleResult[g])) {
+
+                            controlSum++;
+                        }
+                    }
+
+                    if (bubSum.equals(bubSum) & controlSum == result.length) {
+                        System.out.println("Results are correct!");
+                    } else {
+                        System.out.println("Results are WRONG!");
+
+                    }
+                }
                 long totalTime = endTime - startTime;
                 avg += totalTime;
             }

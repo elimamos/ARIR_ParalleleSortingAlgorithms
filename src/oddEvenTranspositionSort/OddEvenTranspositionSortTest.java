@@ -9,7 +9,7 @@ import enumSort.SortData;
 
 /**
  *
- * @author Elisa
+ * @author Zuzia
  */
 public class OddEvenTranspositionSortTest {
      Double[] data;
